@@ -1,6 +1,8 @@
 #! /usr/bin/env nextflow
 
 process get_mitochondrial_genes{
+    time '15m'
+
     input:
     file(mito_gtf)
     
@@ -14,6 +16,8 @@ process get_mitochondrial_genes{
 }
 
 process remove_mitochondrial_genes_gtf{
+    time '15m'
+
     input:
     tuple file(mito_gtf), file(mito_genes)
 
@@ -29,6 +33,8 @@ process remove_mitochondrial_genes_gtf{
 }
 
 process remove_mitochondrial_genes_gff3{
+    time '15m'
+
     input:
     tuple file(mito_gff3), file(mito_genes)
 
@@ -45,6 +51,8 @@ process remove_mitochondrial_genes_gff3{
 }
 
 process lift_mt_annotations{
+    time '30m'
+    
     input:
     tuple file(ref_annotation), file(query_annotation), file(ref_genome), file(query_genome)
     

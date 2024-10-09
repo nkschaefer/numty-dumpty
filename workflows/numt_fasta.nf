@@ -1,6 +1,8 @@
 #! /usr/bin/env nextflow
 
 process faidx_genome{
+    time '30m'
+    
     input:
     file(genome)
     
@@ -19,6 +21,8 @@ def genome_basename(genome){
 }
 
 process remove_MT_genome{
+    time '30m'
+    
     input:
     tuple file(genome), file(faidx), val(mito_name)
     
@@ -40,6 +44,8 @@ process remove_MT_genome{
 }
 
 process get_MT_genome{
+    time '30m'
+    
     input:
     tuple file(genome), file(faidx), val(mito_name)
     
@@ -55,7 +61,8 @@ process get_MT_genome{
 
 process bowtie2_index{
     cpus params.threads
-
+    time '4h'
+    
     input:
     file(genome_noMT)
     
@@ -70,6 +77,8 @@ process bowtie2_index{
 }
 
 process simulate_reads{
+    time '2h'
+    
     input:
     file(genome_MT)
     
@@ -86,7 +95,8 @@ process simulate_reads{
 
 process map_reads{
     cpus params.threads
-
+    time '4h'
+    
     input: 
     tuple file(genome_noMT), file(genome_noMT_idx), file(MT_reads)
     
@@ -106,6 +116,8 @@ process map_reads{
 }
 
 process call_peaks{
+    time '2h'
+    
     input:
     tuple file(genome), file(genome_idx)
     
@@ -124,6 +136,8 @@ process call_peaks{
 }
 
 process mask_genome{
+    time '30m'
+    
     input:
     tuple file(genome), file(bed)
     

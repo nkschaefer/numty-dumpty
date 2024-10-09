@@ -16,6 +16,7 @@ if (!params.chrM){
 } 
 
 process mask_both_beds{
+    time '1h' 
     
     input:
     tuple file(numtmasked_fa), file(bl_bed)
@@ -37,6 +38,7 @@ process mask_both_beds{
 }
 
 process faidx{
+    time '30m'
     
     input:
     file(genome)
@@ -51,6 +53,7 @@ process faidx{
 }
 
 process rm_short_scaffolds_annotation{
+    time '1h'
     
     input:
     tuple file(genome), file(fai), file(annotation)
@@ -79,6 +82,8 @@ process rm_short_scaffolds_annotation{
 }
 
 process rm_short_scaffolds_fa{
+    time '1h'
+    
     input:
     file(genome), file(fai)
     
@@ -100,6 +105,8 @@ process rm_short_scaffolds_fa{
 }
 
 process compress_fa{
+    time '30m'
+
     input:
     file(genome)
     
@@ -115,6 +122,8 @@ process compress_fa{
 }
 
 process compress_annotation{
+    time '30m'
+
     input:
     file(annotation)
     

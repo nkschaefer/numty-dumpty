@@ -2,7 +2,8 @@
 
 process make_bed{
     cpus params.threads
-
+    time '8h'
+    
     input:
     file(genome)
     
