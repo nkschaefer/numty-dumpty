@@ -67,7 +67,9 @@ process lift_mt_annotations{
     file_ext = match[2]
     """
     samtools faidx ${query_genome} ${params.chrM} > query_chrM.fa
-    liftoff -g ${ref_annotation} query_chrM.fa ${ref_genome} > liftoff.txt
+    liftoff -g ${ref_annotation} query_chrM.fa ${ref_genome} |\
+        grep -v "@" | grep -v "#" | grep -v aligning | grep -v lifting |\
+        awk '{if ( NF >= 9){ print \$0; }}' > liftoff.txt
     cat ${query_annotation} liftoff.txt > ${filebase}_MTfix.${file_ext}
     gzip ${filebase}_MTfix.${file_ext}
     """
