@@ -23,7 +23,7 @@ conda activate numty-dumpty
 ```
 Where `[params.yml]` is a [YAML](https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started) file listing parameters. You can see default values for the parameters by looking in `nextflow.config`.
 
-There is an example `[params.yml]` file included in this directory: just copy `[example.yml]` wherever you like, change the values, delete optional parameters you don't want to specify, and delete or ignore the comments.
+There is an example `[params.yml]` file included in this directory: just copy `example.yml` wherever you like, change the values, delete optional parameters you don't want to specify, and delete or ignore the comments.
 
 You are required to provide a FASTA reference genome, but providing an annotation is optional (without an annotation, only the BED files and masked FASTA files will be created). Annotations can be provided in either [GTF](https://genome.ucsc.edu/FAQ/FAQformat.html#format4) or [GFF3](https://genome.ucsc.edu/FAQ/FAQformat.html#format3) format, and either uncompressed or (b)gzip-compressed.
 
