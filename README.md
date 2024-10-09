@@ -32,6 +32,8 @@ There is an example `[params.yml]` file included in this directory: just copy `e
 
 You are required to provide a FASTA reference genome, but providing an annotation is optional (without an annotation, only the BED files and masked FASTA files will be created). Annotations can be provided in either [GTF](https://genome.ucsc.edu/FAQ/FAQformat.html#format4) or [GFF3](https://genome.ucsc.edu/FAQ/FAQformat.html#format3) format, and either uncompressed or (b)gzip-compressed.
 
+One thing to double-check, if supplying an annotation, is the name of the field (in the 9th column) used to supply the gene IDs (default is `gene_id`) and the name used to supply gene names (default is `gene_name`). This pipeline seeks to match genes to their human homologs by comparing both gene IDs and gene names. These can vary from annotation to annotation: for example, `gff3` files from [CAT](https://github.com/ComparativeGenomicsToolkit/Comparative-Annotation-Toolkit) use the field `source_gene` to list the Ensembl gene ID for the homologous human gene and the field `source_gene_common_name` to list the names of these genes. If you are using a CAT annotation, setting the parameter `cat` to `true` will automatically set these two fields. 
+
 ## Output
 This will create the following output files:
 * `[genome]_filt.fa.gz`: a [bgzip](http://www.htslib.org/doc/bgzip.html)-compressed version of the input reference genome, with small and unwanted scaffolds removed
