@@ -1,9 +1,9 @@
 #! /usr/bin/env nextflow
 nextflow.enable.dsl=2
 
-include { rm_numts_annotation } from './pipelines/numt_annotation.nf'
-include { mask_numts_fasta } from './pipelines/numt_fasta.nf'
-include { genmap_blacklist_fasta } from './pipelines/mappability_fasta.nf'
+include { rm_numts_annotation } from './workflows/numt_annotation.nf'
+include { mask_numts_fasta } from './workflows/numt_fasta.nf'
+include { genmap_blacklist_fasta } from './workflows/mappability_fasta.nf'
 
 if (!params.out){
     error("Output directory is required.")
