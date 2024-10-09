@@ -3,6 +3,7 @@ Nextflow pipeline to clean up non-human reference genomes and annotations
 <p>
 <img src="numty_dumpty.png" alt="numty-dumpty" />
 </p>
+
 * Filters the reference genome and annotation to exclude unwanted sequences (*e.g.* unplaced scaffolds and alternate contigs) and sequences below a set length (which can break ATAC-seq analysis tools)
 * Finds candidate [NUMTs](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7671390/) in the genome using the approach suggested [here](https://github.com/caleblareau/mitoblacklist) and outputs a mask in BED format and a hard-masked version of the reference
 * Finds runs of low-mappbility sequence in the reference genome using [GenMap](https://github.com/cpockrandt/genmap) and outputs a mask in BED format and a hard-masked version of the reference
