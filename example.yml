@@ -1,0 +1,30 @@
+# Can be GTF or GFF3, gzipped or not
+# omit if you only want to mask FASTA
+annotation: "/path/to/annotation.gff3.gz"
+# Name of field marking gene IDs in annotation
+# Default = gene_id
+gene_id: "gene_id"
+# Name of field marking gene names in annotation
+# Default = gene_name
+gene_name: "gene_name"
+# Can be gzipped or not
+genome: "/path/to/genome.fa.gz"
+# Directory for output files
+out: "out"
+# Name of mitochondrial sequence 
+# (default = chrM, can exclude)
+chrM: "chrM"
+# Sequences shorter than this length will
+# be removed
+min_len: 500
+# Pipe-separated matching patterns to 
+# filter unwanted reference genome
+# chromosomes/scaffolds
+exclude: "chrUn|random|_alt"
+threads: 1
+# K-mer size to use for mappability mask  
+bl_kmer: 50
+# Minimum number of consecutive low-mappability
+# bases for a region to be included in the
+# low-mappability mask
+bl_run: 500
