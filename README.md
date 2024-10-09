@@ -11,8 +11,9 @@ Nextflow pipeline to clean up non-human reference genomes and annotations
 * Re-annotates the mitochondrial genome using human mitochondrial annotations from [GENCODE v46](https://www.gencodegenes.org/human/) and [liftOff](https://github.com/agshumate/Liftoff)
 
 ## Installation
-Install [conda](https://github.com/conda-forge/miniforge)
-Clone this repository
+* Install [conda](https://github.com/conda-forge/miniforge)
+* Clone this repository
+  
 ```
 cd numty-dumpty
 conda env create --file=numty-dumpty.yml
