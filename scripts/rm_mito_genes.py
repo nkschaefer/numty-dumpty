@@ -30,6 +30,9 @@ is from Comparative Annotation Toolkit (CAT). Equaivalent to --id source_gene --
         required=False, default="gene_id")
     parser.add_argument("--name", "-n", help="Name of field storing gene name",
         required=False, default="gene_name")
+    parser.add_argument("--remove_all_MT", "-r", help="Set to true to remove all genes \
+on the mitochondrial sequence. Default: remove only mitochondrial genes from nuclear \
+sequences.", action="store_true", default=False)
     return parser.parse_args()
 
 def parse_mito_genes(filename):
@@ -48,15 +51,21 @@ def parse_mito_genes(filename):
 def parse_fields_gff3(fields):
     parsed = {}
     for elt in fields.split(';'):
-        k, v = elt.split('=')
-        parsed[k] = v
+        try:
+            k, v = elt.split('=')
+            parsed[k] = v
+        except:
+            pass
     return parsed
 
 def parse_fields_gtf(fields):
     parsed = {}
     for elt in fields.rstrip(';').split(';'):
-        k, v = elt.strip().split(' ')
-        parsed[k] = v.strip('"')
+        try:
+            k, v = elt.strip().split(' ')
+            parsed[k] = v.strip('"')
+        except:
+            pass
     return parsed
 
 def read_annotation(filename, gidfield, gnamefield, is_gff3=False):
@@ -114,8 +123,12 @@ def main(args):
 
     for line, chrom, gid, gname in read_annotation(anno_file, options.id,
         options.name, is_gff3):
-        if chrom != options.chrM and gid not in mito_ids and gname not in mito_names:
-            print(line)
+        if options.remove_all_MT:
+            if chrom != options.chrM and gid not in mito_ids and gname not in mito_names:
+                print(line)
+        else:
+            if chrom == options.chrM or (gid not in mito_ids and gname not in mito_names):
+                print(line)
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

@@ -47,14 +47,16 @@ def main(args):
                 gname = None
                 for elt in dat[8].split(';'):
                     elt = elt.strip()
-                    k, v = elt.split()
-                    if k == options.id:
-                        gid = v.strip('"')
-                    elif k == options.name:
-                        gname = v.strip('"')
-                    if gid is not None and gname is not None:
-                        break
-                
+                    try:
+                        k, v = elt.split()
+                        if k == options.id:
+                            gid = v.strip('"')
+                        elif k == options.name:
+                            gname = v.strip('"')
+                        if gid is not None and gname is not None:
+                            break
+                    except:
+                       pass
                 if gid is not None:
                     gid = gid.split('.')[0]
                     if gname is None:

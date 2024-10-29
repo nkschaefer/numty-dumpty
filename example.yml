@@ -1,6 +1,14 @@
 # Can be GTF or GFF3, gzipped or not
 # omit if you only want to mask FASTA
 annotation: "/path/to/annotation.gff3.gz"
+# If true, all mitochondrial genes will be removed
+# from the annotation, and mitochondrion will be
+# re-annotated by lifting the Human gencode annotation
+# to your genome. If false, mitochondrial genes will
+# be removed from nuclear sequences, but the
+# mitochondrial genes themselves will be left alone.
+# If using a CAT annotation, set to true.
+lift_human_MT: false
 # Name of field marking gene IDs in annotation
 # Default = gene_id
 gene_id: "gene_id"

@@ -15,6 +15,8 @@ process make_bed{
     script:
     genome_base = ( genome =~ /(.*)\.(fa|fasta|FA|FASTA)(\.gz)?/ )[0][1] 
     """
+    echo $PATH
+    echo ""
     if gzip -t ${genome} 2> /dev/null; then 
         gunzip -c ${genome} > unzipped.fa
         genmap index -F unzipped.fa -I genmap.idx

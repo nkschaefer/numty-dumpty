@@ -53,7 +53,7 @@ process faidx{
 }
 
 process rm_short_scaffolds_annotation{
-    time '1h'
+    time '2h'
     
     input:
     tuple file(genome), file(fai), file(annotation)
@@ -62,7 +62,7 @@ process rm_short_scaffolds_annotation{
     tuple file("*filt.fa"), file("*filt.{gtf,gff3}")
     
     script:
-    genome_base = ( genome =~ /(.*)\.(fa|fasta|FA|FASTA)(\.gz)?/ )[0][1]
+    genome_base = ( genome =~ /(.*)\.(fa|fna|fasta|FA|FASTA)(\.gz)?/ )[0][1]
     anno_match = ( annotation =~ /(.*)\.(gtf|gff3)(\.gz)?/ )[0]
     annotation_base = anno_match[1]
     annotation_ext = anno_match[2]
@@ -82,7 +82,7 @@ process rm_short_scaffolds_annotation{
 }
 
 process rm_short_scaffolds_fa{
-    time '1h'
+    time '2h'
     
     input:
     file(genome), file(fai)
