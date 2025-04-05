@@ -1,7 +1,7 @@
 # numty-dumpty
 Nextflow pipeline to clean up non-human reference genomes and annotations
-<p align="center">
-<img src="numty_dumpty.png" alt="numty-dumpty" width=100 />
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="numty_dumpty.png" alt="numty-dumpty" width=100 />
 </p>
 
 * Filters the reference genome and annotation to exclude unwanted sequences (*e.g.* unplaced scaffolds and alternate contigs) and sequences below a set length (which can break ATAC-seq analysis tools)
@@ -44,4 +44,6 @@ This will create the following output files:
 * `[annotation]_filt.[gff3/gtf].gz`: a [bgzip](http://www.htslib.org/doc/bgzip.html)-compressed version of the input annotation, with small and unwanted scaffolds removed
 * `[annotation]_filt_noNumt_MTfix.[gff3/gtf].gz`: a version of the input annotation, with small and unwanted scaffolds removed, genes corresponding to human-annotated mitochondrial genes removed from the autosomes, and the mitochondrion re-annotated by lifting over human mitochondrial genes
 
+#### Acknowledgements
+Thanks to [Helena Pinheiro](https://www.hpinheiro.com/) for the mitochondrion illustration
 
