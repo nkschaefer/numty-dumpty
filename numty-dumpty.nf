@@ -85,7 +85,7 @@ process rm_short_scaffolds_fa{
     time '2h'
     
     input:
-    file(genome), file(fai)
+    tuple file(genome), file(fai)
     
     output:
     file("*filt.fa")
@@ -142,7 +142,7 @@ workflow{
     
     // index input FASTA 
     fa_indexed = faidx(Channel.fromPath(params.genome))
-    
+ 
     // Toss out short sequences and ones marked excludable (i.e. 
     // random, chrUn, alt scaffolds)
     if (params.annotation){

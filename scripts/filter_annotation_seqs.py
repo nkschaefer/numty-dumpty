@@ -3,6 +3,7 @@ import sys
 import os
 import argparse
 import gzip
+from anno_parse import *
 
 def parse_args():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -12,10 +13,6 @@ def parse_args():
         required=True)
     return parser.parse_args()
 
-def is_gz_file(filepath):
-    with open(filepath, 'rb') as test_f:
-        return test_f.read(2) == b'\x1f\x8b'
-
 def main(args):
     options = parse_args()
     seqs_keep = set([])
@@ -24,21 +21,13 @@ def main(args):
         line = line.rstrip()
         seqs_keep.add(line)
     f.close()
-    is_gz = False
-    if is_gz_file(options.annotation):
-        is_gz = True
-        f = gzip.open(options.annotation, 'r')
-    else:
-        f = open(options.annotation, 'r')
-    for line in f:
-        if is_gz:
-            line = line.decode().rstrip()
-        else:
-            line = line.rstrip()
-        dat = line.split('\t')
-        if dat[0] in seqs_keep:
-            print(line)
     
-
+    for record in read_annotation(options.annotation):
+        if record['comment']:
+            print(record['line'])
+        else:
+            if record['seq'] in seqs_keep:
+                print(record['line'])
+        
 if __name__ == '__main__':
     sys.exit(main(sys.argv))

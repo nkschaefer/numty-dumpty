@@ -13,10 +13,10 @@ process get_mitochondrial_genes{
     """
     # Get mitochondrial genes from GENCODE (human) annotation
     # Any genes with different (non-human Ensembl) IDs will be missed
-    ${baseDir}/scripts/get_mito_genes.py --gtf ${mito_gtf} > mito_genes.txt 
+    ${baseDir}/scripts/get_mito_genes.py --annotation ${mito_gtf} > mito_genes.txt 
     # Get mitochondrial genes from user-provided annotation
     # Genes in nuclear genome with matching names/IDs will be removed    
-    ${baseDir}/scripts/get_mito_genes.py --gtf ${genome_gtf} -m ${params.chrM} \
+    ${baseDir}/scripts/get_mito_genes.py --annotation ${genome_gtf} -m ${params.chrM} \
         --id ${params.gene_id} --name ${params.gene_name} >> mito_genes.txt
     """
 }
@@ -34,7 +34,7 @@ process remove_mitochondrial_genes_gtf{
     filebase=( mito_gtf =~ /(.*)\.gtf(\.gz)?/ )[0][1]
     """
     ${baseDir}/scripts/rm_mito_genes.py -M ${mito_genes} -m ${params.chrM} -i ${params.gene_id} \
-        -n ${params.gene_name} --gtf ${mito_gtf} --remove_all_MT > ${filebase}_nonumt.gtf
+        -n ${params.gene_name} --annotation ${mito_gtf} --remove_all_MT > ${filebase}_nonumt.gtf
     """
 }
 
@@ -51,7 +51,7 @@ process remove_mitochondrial_genes_nuclear_contigs_gtf{
     filebase=( mito_gtf =~ /(.*)\.gtf(\.gz)?/ )[0][1]
     """
     ${baseDir}/scripts/rm_mito_genes.py -M ${mito_genes} -m ${params.chrM} -i ${params.gene_id} \
-        -n ${params.gene_name} --gtf ${mito_gtf} > ${filebase}_nonumt.gtf
+        -n ${params.gene_name} --annotation ${mito_gtf} > ${filebase}_nonumt.gtf
     """
 }
 process remove_mitochondrial_genes_gff3{
@@ -67,7 +67,7 @@ process remove_mitochondrial_genes_gff3{
     filebase=( mito_gff3 =~ /(.*)\.gff3(\.gz)?/ )[0][1]
     """
     ${baseDir}/scripts/rm_mito_genes.py -M ${mito_genes} -m ${params.chrM} -i ${params.gene_id} \
-        -n ${params.gene_name} --gff3 ${mito_gff3} --remove_all_MT > ${filebase}_nonumt.gff3
+        -n ${params.gene_name} --annotation ${mito_gff3} --remove_all_MT > ${filebase}_nonumt.gff3
     """
 
 }
@@ -85,7 +85,7 @@ process remove_mitochondrial_genes_nuclear_contigs_gff3{
     filebase=( mito_gff3 =~ /(.*)\.gff3(\.gz)?/ )[0][1]
     """
     ${baseDir}/scripts/rm_mito_genes.py -M ${mito_genes} -m ${params.chrM} -i ${params.gene_id} \
-        -n ${params.gene_name} --gff3 ${mito_gff3} > ${filebase}_nonumt.gff3
+        -n ${params.gene_name} --annotation ${mito_gff3} > ${filebase}_nonumt.gff3
     """
 
 }
