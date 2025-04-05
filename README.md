@@ -1,7 +1,7 @@
 # numty-dumpty
 Nextflow pipeline to clean up non-human reference genomes and annotations
-<p>
-&nbsp;&nbsp;&nbsp;&nbsp;<img src="numty_dumpty.png" alt="numty-dumpty" width=100 />
+<p align="center">
+<img src="numty_dumpty.png" alt="numty-dumpty" width=100 />
 </p>
 
 * Filters the reference genome and annotation to exclude unwanted sequences (*e.g.* unplaced scaffolds and alternate contigs) and sequences below a set length (which can break ATAC-seq analysis tools)
